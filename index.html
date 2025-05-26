@@ -1,533 +1,557 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caja de Ahorro TUPAK RANTINA - Economía Popular y Solidaria</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caja de Ahorro TUPAK RANTINA – Economía Popular y Solidaria</title>
 
-        :root {
-            --primary-dark: #001749;
-            --primary-orange: #e48410;
-            --primary-blue: #3787c6;
-            --primary-light-blue: #015cd0;
-            --white: #ffffff;
-            --gray-light: #f8f9fa;
-            --gray: #6c757d;
-            --shadow: rgba(0, 23, 73, 0.1);
-        }
+  <!-- Favicon -->
+  <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--primary-dark);
-            overflow-x: hidden;
-        }
+  <style>
+    /* RESET + VARIABLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      /* altura total del header fijo */
+      --header-height: 92px;
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light-blue) 100%);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px var(--shadow);
-            animation: slideDown 0.5s ease-out;
-        }
+      --primary-dark: #001749;
+      --primary-orange: #e48410;
+      --primary-blue: #3787c6;
+      --primary-light-blue: #015cd0;
+      --white: #ffffff;
+      --gray-light: #f8f9fa;
+      --shadow: rgba(0, 23, 73, 0.1);
+    }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
+html {
+  scroll-behavior: smooth;
+}
 
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* Configuración de scroll-margin-top para todas las secciones */
+#nosotros, #servicios, #credito, #contacto {
+  scroll-margin-top: var(--header-height);
+}
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+/* Para el inicio, necesitamos compensar el margin-top del hero */
+#inicio {
+  scroll-margin-top: 0;
+}
 
-        .logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--white);
-            padding: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--primary-dark);
+      overflow-x: hidden;
+    }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+    /* HEADER FIJO */
+    header {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light-blue) 100%);
+      padding: 1rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 20px var(--shadow);
+      animation: slideDown 0.5s ease-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to   { transform: translateY(0); }
+    }
 
-        .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+    /* NAVEGACIÓN */
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        .brand-name {
-            color: var(--white);
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--white);
+      padding: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform .3s ease;
+    }
+    .logo:hover { transform: scale(1.05); }
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .brand-name {
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
+    /* BOTÓN HAMBURGUESA (MÓVIL) */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 1002;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all .3s;
+    }
 
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      transition: transform .3s ease;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: color .3s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--primary-orange);
+      transition: width .3s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--primary-orange);
-            transition: width 0.3s ease;
-        }
+    /* HERO */
+    .hero {
+      /* Removemos el margin-top y usamos padding-top en su lugar */
+      padding-top: calc(var(--header-height) + 4rem);
+      padding-bottom: 4rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 50%, var(--primary-light-blue) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      /* Asegurar que el hero tenga altura mínima */
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-43-7c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 78c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM69 47c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM88 82c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM10 37c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM38 5c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM14 2c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+      top: -50%;
+      left: -50%;
+      animation: float 20s linear infinite;
+    }
+    @keyframes float {
+      0%   { transform: translate(0,0) rotate(0deg); }
+      100% { transform: translate(100px,100px) rotate(360deg); }
+    }
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-        /* Hero Section */
-        .hero {
-            margin-top: 92px;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 50%, var(--primary-light-blue) 100%);
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+    .hero h1 {
+      color: var(--white);
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .hero p {
+      color: var(--white);
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: .9;
+    }
+    .cta-button {
+      display: inline-block;
+      background: var(--primary-orange);
+      color: var(--white);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all .3s ease;
+      box-shadow: 0 4px 15px rgba(228,132,16,0.3);
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(228,132,16,0.4);
+      background: #d57a0e;
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.133 7-7s-3.134-7-7-7-7 3.133-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 78c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM69 47c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM88 82c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM10 37c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM38 5c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM14 2c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
-            top: -50%;
-            left: -50%;
-            animation: float 20s linear infinite;
-        }
+    /* LOGO TRANSPARENTE SOBRE EL HERO */
+    .hero-logo {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      max-width: 120px;
+      opacity: .15;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            100% {
-                transform: translate(100px, 100px) rotate(360deg);
-            }
-        }
+    /* SECCIONES GENERALES */
+    .about, .services, .requirements, footer {
+      scroll-margin-top: var(--header-height);
+    }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeInUp 1s ease-out;
-        }
+    /* .about */
+    .about {
+      padding: 4rem 2rem;
+      background: var(--gray-light);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: var(--primary-dark);
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 4px;
+      background: var(--primary-orange);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 2rem;
+    }
+    .about-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px var(--shadow);
+      transition: transform .3s ease;
+    }
+    .about-card:hover { transform: translateY(-5px); }
+    .about-card h3 { color: var(--primary-blue); margin-bottom: 1rem; font-size: 1.5rem; }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* .services */
+    .services {
+      padding: 4rem 2rem;
+      background: var(--white);
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      text-align: center;
+      padding: 2rem;
+      border-radius: 15px;
+      background: linear-gradient(135deg,var(--gray-light) 0%,var(--white) 100%);
+      box-shadow: 0 5px 20px var(--shadow);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px var(--shadow);
+    }
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg,var(--primary-blue) 0%,var(--primary-light-blue) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--white);
+    }
 
-        .hero h1 {
-            color: var(--white);
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+    /* .requirements */
+    .requirements {
+      padding: 4rem 2rem;
+      background: var(--gray-light);
+    }
+    .req-list {
+      list-style: none;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .req-list li {
+      background: var(--white);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px var(--shadow);
+      border-left: 4px solid var(--primary-orange);
+      transition: transform .3s ease;
+    }
+    .req-list li:hover { transform: translateX(10px); }
 
-        .hero p {
-            color: var(--white);
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
+    /* FOOTER */
+    footer {
+      background: var(--primary-dark);
+      color: var(--white);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-info { margin-bottom: 2rem; }
+    .footer-info p { margin: .5rem 0; }
 
-        .cta-button {
-            display: inline-block;
-            background: var(--primary-orange);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(228, 132, 16, 0.3);
-        }
+    /* WHATSAPP FLOAT */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25d366;
+      color: var(--white);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      text-decoration: none;
+      box-shadow: 0 5px 20px rgba(37,211,102,0.3);
+      animation: pulse 2s infinite;
+      z-index: 1000;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 5px 20px rgba(37,211,102,0.3); }
+      50%  { box-shadow: 0 5px 30px rgba(37,211,102,0.6); }
+      100% { box-shadow: 0 5px 20px rgba(37,211,102,0.3); }
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      background: #20ba5a;
+    }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(228, 132, 16, 0.4);
-            background: #d57a0e;
-        }
-
-        /* About Section */
-        .about {
-            padding: 4rem 2rem;
-            background: var(--gray-light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--primary-dark);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: var(--primary-orange);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .about-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .about-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .about-card h3 {
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 4rem 2rem;
-            background: var(--white);
-        }
-
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 15px;
-            background: linear-gradient(135deg, var(--gray-light) 0%, var(--white) 100%);
-            box-shadow: 0 5px 20px var(--shadow);
-            transition: all 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px var(--shadow);
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-light-blue) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: var(--white);
-        }
-
-        /* Requirements Section */
-        .requirements {
-            padding: 4rem 2rem;
-            background: var(--gray-light);
-        }
-
-        .req-list {
-            list-style: none;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .req-list li {
-            background: var(--white);
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px var(--shadow);
-            border-left: 4px solid var(--primary-orange);
-            transition: transform 0.3s ease;
-        }
-
-        .req-list li:hover {
-            transform: translateX(10px);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary-dark);
-            color: var(--white);
-            padding: 3rem 2rem 2rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-info {
-            margin-bottom: 2rem;
-        }
-
-        .footer-info p {
-            margin: 0.5rem 0;
-        }
-
-        /* WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25d366;
-            color: var(--white);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            text-decoration: none;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
-            }
-            50% {
-                box-shadow: 0 5px 30px rgba(37, 211, 102, 0.6);
-            }
-            100% {
-                box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
-            }
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background: #20ba5a;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    /* RESPONSIVE: MENÚ HAMBURGUESA + SIDEBAR DERECHO */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: fixed;
+        top: var(--header-height);
+        right: 0;
+        flex-direction: column;
+        background: var(--primary-dark);
+        width: 75%;
+        height: calc(100% - var(--header-height));
+        padding: 2rem;
+        transform: translateX(110%);
+      }
+      .nav-links.open {
+        transform: translateX(0);
+        z-index: 1001;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .hero h1 { font-size: 2rem; }
+      .hero p  { font-size: 1.1rem; }
+      .section-title { font-size: 2rem; }
+      
+      /* Ajustar hero en móvil */
+      .hero {
+        min-height: 100vh;
+        padding-top: calc(var(--header-height) + 2rem);
+        padding-bottom: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+    
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo-container">
-                <div class="logo">
-                    <img src="https://i.postimg.cc/zBPmbxNT/TRANSPARENTE-min.png" alt="TUPAK RANTINA">
-                </div>
-                <div class="brand-name">TUPAK RANTINA</div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#requisitos">Requisitos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="inicio">
-        <div class="hero-content">
-            <h1>Caja de Ahorro TUPAK RANTINA</h1>
-            <p>Economía Popular y Solidaria al Servicio de Machachi</p>
-            <a href="#servicios" class="cta-button">Conoce Nuestros Servicios</a>
+  <!-- HEADER + NAV -->
+  <header>
+    <nav>
+      <div class="logo-container">
+        <div class="logo">
+          <img src="icons/logo.png" alt="TUPAK RANTINA">
         </div>
-    </section>
+        <div class="brand-name">TUPAK RANTINA</div>
+      </div>
 
-    <!-- About Section -->
-    <section class="about" id="nosotros">
-        <div class="container">
-            <h2 class="section-title">Sobre Nosotros</h2>
-            <div class="about-grid">
-                <div class="about-card">
-                    <h3>Nuestra Misión</h3>
-                    <p>Somos una organización de economía popular y solidaria sin fines de lucro, comprometida con el desarrollo económico de Machachi, cantón Mejía. Constituida el 22 de mayo de 2025, trabajamos para mitigar el riesgo crediticio y fortalecer la economía local.</p>
-                </div>
-                <div class="about-card">
-                    <h3>Marco Legal</h3>
-                    <p>Operamos bajo la Ley Orgánica de Economía Popular y Solidaria, el Código Orgánico Monetario y Financiero, y las normas de la Junta de Política y Regulación Monetaria y Financiera, garantizando transparencia y seguridad en todas nuestras operaciones.</p>
-                </div>
-                <div class="about-card">
-                    <h3>Nuestros Valores</h3>
-                    <p>Promovemos la solidaridad, transparencia, responsabilidad social y educación financiera. Garantizamos la confidencialidad y protección de datos de todos nuestros socios, trabajando siempre con ética y profesionalismo.</p>
-                </div>
-            </div>
+      <!-- BOTÓN HAMBURGUESA -->
+      <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#credito">Crédito Fácil</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+      <h1>Caja de Ahorro TUPAK RANTINA</h1>
+      <p>Economía Popular y Solidaria al Servicio de Machachi</p>
+      <a href="#servicios" class="cta-button">Conoce Nuestros Servicios</a>
+    </div>
+    <!-- Logo transparente superpuesto -->
+    <img src="icons/logo.png" alt="" class="hero-logo">
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about" id="nosotros">
+    <div class="container">
+      <h2 class="section-title">Sobre Nosotros</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Nuestra Misión</h3>
+          <p>Somos una caja de ahorros y crédito, comprometida con el desarrollo económico de Machachi, cantón Mejía. Constituida el 22 de mayo de 2025, trabajamos para mitigar el riesgo crediticio y fortalecer la economía local.</p>
         </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services" id="servicios">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <div class="service-icon">💰</div>
-                    <h3>Ahorro Seguro</h3>
-                    <p>Captación de ahorros con aporte inicial de USD $20 y aportes mensuales voluntarios. Tu dinero está seguro con nosotros.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💳</div>
-                    <h3>Microcrédito Minorista</h3>
-                    <p>Préstamos de hasta USD $400 con plazos de hasta 6 meses. Sin garantía explícita para socios con buen historial.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📈</div>
-                    <h3>Microcrédito de Acumulación</h3>
-                    <p>Créditos para hacer crecer tu negocio con plazos de hasta 12 meses y montos según tu capacidad de pago.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎓</div>
-                    <h3>Educación Financiera</h3>
-                    <p>Capacitación continua para mejorar la administración de tus finanzas personales y empresariales.</p>
-                </div>
-            </div>
+        <div class="about-card">
+          <h3>Marco Legal</h3>
+          <p>Operamos bajo la Ley Orgánica de Economía Popular y Solidaria, el Código Orgánico Monetario y Financiero, y las normas de la Junta de Política y Regulación Monetaria y Financiera, garantizando transparencia y seguridad en todas nuestras operaciones.</p>
         </div>
-    </section>
-
-    <!-- Requirements Section -->
-    <section class="requirements" id="requisitos">
-        <div class="container">
-            <h2 class="section-title">Requisitos para Ser Socio</h2>
-            <ul class="req-list">
-                <li>
-                    <strong>Nacionalidad:</strong> Ser ecuatoriano y residente dentro del área de cobertura de la Caja
-                </li>
-                <li>
-                    <strong>Edad:</strong> Tener entre 22 y 65 años
-                </li>
-                <li>
-                    <strong>Actividad Económica:</strong> Contar con actividad en comercio, producción o servicios
-                </li>
-                <li>
-                    <strong>Aporte Inicial:</strong> Realizar un depósito mínimo de USD $20
-                </li>
-                <li>
-                    <strong>Historial Crediticio:</strong> Demostrar buen comportamiento crediticio
-                </li>
-                <li>
-                    <strong>Para Créditos:</strong> Mínimo 15 días de antigüedad como socio y aportes al día
-                </li>
-            </ul>
+        <div class="about-card">
+          <h3>Nuestros Valores</h3>
+          <p>Promovemos la solidaridad, transparencia, responsabilidad social y educación financiera. Garantizamos la confidencialidad y protección de datos de todos nuestros socios, trabajando siempre con ética y profesionalismo.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer id="contacto">
-        <div class="footer-content">
-            <div class="footer-info">
-                <h3>Caja de Ahorro TUPAK RANTINA</h3>
-                <p>📍 Machachi, Cantón Mejía, Provincia de Pichincha</p>
-                <p>✉️ Economía Popular y Solidaria</p>
-                <p>📅 Constituida el 22 de mayo de 2025</p>
-            </div>
-            <p>&copy; 2025 Caja de Ahorro TUPAK RANTINA. Todos los derechos reservados.</p>
+  <!-- SERVICES SECTION -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <h2 class="section-title">Nuestros Servicios</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-icon">💰</div>
+          <h3>Ahorro Seguro</h3>
+          <p>Puedes estar seguro de que tus ahorros estarán protegidos y SIEMPRE disponibles para cuando llegues a necesitarlos.</p>
         </div>
-    </footer>
+        <div class="service-card">
+          <div class="service-icon">💳</div>
+          <h3>Microcrédito Minorista</h3>
+          <p>Préstamos de hasta USD $400 con plazos de hasta 6 meses. Sin garantía explícita para socios con buen historial.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📈</div>
+          <h3>Microcrédito de Acumulación</h3>
+          <p>Créditos para hacer crecer tu negocio con plazos de hasta 12 meses y montos según tu capacidad de pago.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3>Educación Financiera</h3>
+          <p>Capacitación continua para mejorar la administración de tus finanzas personales y empresariales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- WhatsApp Float Button -->
-    <a href="https://api.whatsapp.com/send?phone=5939622408046&text=Te%20contacto%20desde%20la%20página%20web%2C%20necesito%20más%20información." 
-       class="whatsapp-float" 
-       target="_blank"
-       aria-label="Contactar por WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289-.086.101-.18.225-.259.303-.086.087-.175.18-.074.353.101.173.448.783.96 1.267.659.619 1.216.81 1.388.897.173.087.273.072.374-.044.101-.116.431-.506.546-.68.115-.173.23-.144.388-.086.159.057.999.473 1.171.559.172.086.287.13.329.203.043.072.043.419-.101.824z"/>
-        </svg>
-    </a>
+  <!-- REQUIREMENTS SECTION -->
+  <section class="requirements" id="credito">
+    <div class="container">
+      <h2 class="section-title">Obtén tu crédito fácilmente</h2>
+      <ul class="req-list">
+        <li><strong>Sencillo:</strong> Sin tantos requisitos</li>
+        <li><strong>Eficiente:</strong> En tan solo 8 horas si eres elegible para tu crédito.</li>
+        <li><strong>Servicio personalizado:</strong> Entendemos a nuestros socios y buscamos soluciones</li>
+        <li><strong>Haz tus sueños realidad:</strong> Tupak Rantina te ayuda.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contacto">
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Caja de Ahorro TUPAK RANTINA</h3>
+        <p>📍 Machachi, Cantón Mejía, Provincia de Pichincha</p>
+        <p>✉️ Economía Popular y Solidaria</p>
+        <p>📅 Constituida el 22 de mayo de 2025</p>
+      </div>
+      <p>&copy; 2025 Caja de Ahorro TUPAK RANTINA. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT BUTTON -->
+  <a href="https://api.whatsapp.com/send?phone=5939622408046&text=Te%20contacto%20desde%20la%20página%20web%2C%20necesito%20más%20información."
+     class="whatsapp-float"
+     target="_blank"
+     aria-label="Contactar por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289-.086.101-.18.225-.259.303-.086.087-.175.18-.074.353.101.173.448.783.96 1.267.659.619 1.216.81 1.388.897.173.087.273.072.374-.044.101-.116.431-.506.546-.68.115-.173.23-.144.388-.086.159.057.999.473 1.171.559.172.086.287.13.329.203.043.072.043.419-.101.824z"/>
+    </svg>
+  </a>
+
+  <!-- SCRIPT DE MENU -->
+  <script>
+    const toggle    = document.getElementById('menu-toggle');
+    const navLinks  = document.querySelector('.nav-links');
+    const menuItems = document.querySelectorAll('.nav-links a');
+
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
 </body>
 </html>
